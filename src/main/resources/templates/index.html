@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:text="#{main.title}">Spring Boot Recipes - Library</title>
+</head>
+<body>
+    <h1 th:text="#{index.title}">Library</h1>
+    <a th:href="@{/books.html}" href="#" th:text="#{index.books.link}">List of books</a>
+
+    <div>
+        <a href="?locale=en" th:text="#{main.language.en}">EN</a> | 
+        <a href="?locale=ko" th:text="#{main.language.ko}">KO</a>
+    </div>
+</body>
+</html>
