@@ -2,8 +2,14 @@ package com.kido.boot.demo;
 
 import java.util.Locale;
 
+import org.apache.catalina.connector.Connector;
+import org.apache.tomcat.util.descriptor.web.SecurityCollection;
+import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
+import org.springframework.beans.BeansException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.embedded.tomcat.TomcatContextCustomizer;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -31,14 +37,14 @@ public class DemoApplication implements WebMvcConfigurer {
 		return new AcceptHeaderLocaleResolver();
 	}
 
-	@Bean 
+	@Bean
 	public LocaleResolver localeResolver2() {
 		SessionLocaleResolver localeResolver = new SessionLocaleResolver();
 		localeResolver.setDefaultLocale(new Locale("en"));
 		return localeResolver;
 	}
 
-	@Bean 
+	@Bean
 	public LocaleResolver localeResolver() {
 		CookieLocaleResolver resolver = new CookieLocaleResolver();
 		// resolver.setCookieName("language");
@@ -65,5 +71,67 @@ public class DemoApplication implements WebMvcConfigurer {
 		return new LocaleChangeInterceptor();
 	}
 
-	
+	// HTTP 와 HTTPS 모두 지원
+	// @Bean
+	// public TomcatServletWebServerFactory tomcatServletWebServerFactory() {
+	// var factory = new TomcatServletWebServerFactory();
+	// factory.addAdditionalTomcatConnectors(httpConnector());
+	// return factory;
+	// }
+
+	// private Connector httpConnector() {
+	// var connector = new
+	// Connector(TomcatServletWebServerFactory.DEFAULT_PROTOCOL);
+	// connector.setScheme("http");
+	// connector.setPort(8080);
+	// connector.setSecure(false);
+
+	// return connector;
+	// }
+
+	// @Bean
+	// public BeanPostProcessor addHttpConnectorProcessor() {
+	// return new BeanPostProcessor() {
+	// @Override
+	// public Object postProcessBeforeInitialization(Object bean, String beanName)
+	// throws BeansException {
+	// if (bean instanceof TomcatServletWebServerFactory) {
+	// var factory = (TomcatServletWebServerFactory) bean;
+	// factory.addAdditionalTomcatConnectors(httpConnector());
+	// }
+	// return bean;
+	// };
+	// };
+	// }
+
+	// // HTTP를 HTTPS로 리다이렉션
+	// @Bean
+	// public TomcatServletWebServerFactory tomcatServletWebServerFactory() {
+	// var factory = new TomcatServletWebServerFactory();
+	// factory.addAdditionalTomcatConnectors(httpConnector());
+	// factory.addContextCustomizers(securityCustomizer());
+	// return factory;
+	// }
+
+	// private Connector httpConnector() {
+	// var connector = new
+	// Connector(TomcatServletWebServerFactory.DEFAULT_PROTOCOL);
+	// connector.setScheme("http");
+	// connector.setPort(8080);
+	// connector.setSecure(false);
+	// connector.setRedirectPort(8443);
+	// return connector;
+	// }
+
+	// private TomcatContextCustomizer securityCustomizer() {
+	// return context -> {
+	// var securityConstraint = new SecurityConstraint();
+	// securityConstraint.setUserConstraint("CONFIDENTIAL");
+	// var collection = new SecurityCollection();
+	// collection.addPattern("/*");
+	// securityConstraint.addCollection(collection);
+	// context.addConstraint(securityConstraint);
+	// };
+	// }
+
 }
