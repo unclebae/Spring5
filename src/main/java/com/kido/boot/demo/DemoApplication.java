@@ -2,14 +2,10 @@ package com.kido.boot.demo;
 
 import java.util.Locale;
 
-import org.apache.catalina.connector.Connector;
-import org.apache.tomcat.util.descriptor.web.SecurityCollection;
-import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
-import org.springframework.beans.BeansException;
+import com.amazonaws.codeguru.agent.Profiler;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.embedded.tomcat.TomcatContextCustomizer;
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -24,7 +20,10 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 public class DemoApplication implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+
+		var cpmtext = SpringApplication.run(DemoApplication.class, args);
+		System.out.println(context);
+
 	}
 
 	@Bean
