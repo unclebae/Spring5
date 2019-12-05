@@ -21,7 +21,7 @@ public class DemoApplication implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
 
-		var cpmtext = SpringApplication.run(DemoApplication.class, args);
+		var context = SpringApplication.run(DemoApplication.class, args);
 		System.out.println(context);
 
 	}
